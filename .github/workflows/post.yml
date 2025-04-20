@@ -1,15 +1,18 @@
-name: Post to X twice daily
+name: Post AI News to Slack
 
 on:
   schedule:
-    - cron: '0 23 * * *'   # JST 8:00
-    - cron: '0 9 * * *'    # JST 18:00
-    - cron: '45 13 * * *'  # テスト用
+    - cron: '0 23 * * *'  # JST 8:00（= UTC 23:00）
+    - cron: '0 9 * * *'   # JST 18:00（= UTC 9:00）
   workflow_dispatch:
 
 jobs:
-  post:
+  post-to-slack:
     runs-on: ubuntu-latest
+
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
       - name: Checkout code
@@ -22,11 +25,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run main.py
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Run bot
         run: python main.py
