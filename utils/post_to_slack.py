@@ -1,16 +1,14 @@
+import os
 import requests
-import json
+from dotenv import load_dotenv
 
-# 発行されたWebhook URLをここに貼り付けてください
-WEBHOOK_URL = "https://hooks.slack.com/services/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"
+load_dotenv()
 
-def post_to_slack(message):
-    payload = {"text": message}
-    headers = {"Content-Type": "application/json"}
-
-    response = requests.post(WEBHOOK_URL, headers=headers, data=json.dumps(payload))
-
+def post_to_slack(text):
+    url = os.getenv("SLACK_WEBHOOK_URL")
+    payload = {"text": text}
+    response = requests.post(url, json=payload)
     if response.status_code == 200:
-        print("✅ Slackへの投稿に成功しました。")
+        print("✅ Slack投稿成功")
     else:
-        print(f"⚠️ 投稿失敗: {response.status_code} - {response.text}")
+        print("⚠️ Slack投稿失敗:", response.status_code, response.text)
