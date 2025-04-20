@@ -24,7 +24,6 @@ def get_translated_articles(limit_per_feed=1):
                 link = entry.link
 
                 lang = detect(title)
-
                 if lang == "en":
                     title = translator.translate(title, src="en", dest="ja").text
 
@@ -32,7 +31,6 @@ def get_translated_articles(limit_per_feed=1):
                     "title": title.strip(),
                     "link": link.strip()
                 })
-
         except Exception as e:
             print(f"❌ フィード取得エラー: {url} / {e}")
 
