@@ -2,7 +2,7 @@ import requests
 import json
 
 # 発行されたWebhook URLをここに貼り付けてください
-WEBHOOK_URL = "https://hooks.slack.com/services/XXXX/YYYY/ZZZZ"
+WEBHOOK_URL = "https://hooks.slack.com/services/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"
 
 def post_to_slack(message):
     payload = {"text": message}
