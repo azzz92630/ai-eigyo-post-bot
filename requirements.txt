@@ -4,4 +4,4 @@ feedparser
 requests
 beautifulsoup4
 google-generativeai
-lxml>=4.9.3
+lxml
