@@ -1,14 +1,25 @@
-import os
-import requests
-from dotenv import load_dotenv
+from utils.fetch_news import get_latest_articles
+from utils.generate_post import summarize_article
+from utils.post_to_slack import post_to_slack  # 👈 Slack投稿用を使用
 
-load_dotenv()
+print("スクリプトが起動しました！")
 
-def post_to_slack(text):
-    url = os.getenv("SLACK_WEBHOOK_URL")
-    payload = {"text": text}
-    response = requests.post(url, json=payload)
-    if response.status_code == 200:
-        print("✅ Slack投稿成功")
-    else:
-        print("⚠️ Slack投稿失敗:", response.status_code, response.text)
+# 最新記事を取得（1件）
+articles = get_latest_articles(limit=1)
+
+# 固定のハッシュタグ
+hashtags = "#営業女子 #AI営業 #生成AI活用"
+
+# 投稿ループ
+for article in articles:
+    title = article["title"]
+    link = article["link"]
+
+    # Gemini等で生成した投稿文
+    post_text = summarize_article(title, link)
+
+    # ハッシュタグ付きで整形
+    full_text = f"{post_text}\n\n{hashtags}"
+
+    # Slackに投稿
+    post_to_slack(full_text)
