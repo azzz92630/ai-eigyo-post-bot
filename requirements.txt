@@ -1,8 +1,6 @@
-tweepy
-python-dotenv
 feedparser
-requests
-beautifulsoup4
+langdetect
+googletrans==4.0.0-rc1
 google-generativeai
-lxml
-html5lib
+python-dotenv
+requests
