@@ -22,3 +22,5 @@ def post_to_slack(text):
             print(f"⚠️ Slack投稿失敗: {response.status_code} - {response.text}")
     except Exception as e:
         print(f"🚨 Slack送信中にエラーが発生しました: {e}")
+        print(f"Slack投稿結果: {response.status_code} - {response.text}")
+
