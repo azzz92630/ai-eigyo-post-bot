@@ -1,25 +1,18 @@
-from utils.fetch_news import get_latest_articles
-from utils.generate_post import summarize_article
-from utils.post_to_slack import post_to_slack  # 👈 TwitterではなくSlack用
+import os
+from dotenv import load_dotenv
+import google.generativeai as genai
 
-print("スクリプトが起動しました！")
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# 最新記事を取得（1件）
-articles = get_latest_articles(limit=1)
+model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
 
-# 固定のハッシュタグ
-hashtags = "#営業女子 #AI営業 #生成AI活用"
-
-# 投稿ループ
-for article in articles:
-    title = article["title"]
-    link = article["link"]
-
-    # Gemini等で生成した投稿文
-    post_text = summarize_article(title, link)
-
-    # ハッシュタグ付きで整形
-    full_text = f"{post_text}\n\n{hashtags}"
-
-    # Slackに投稿
-    post_to_slack(full_text)
+def summarize_article(title, url):
+    prompt = (
+        f"↓以下は生成AIに関する記事のタイトルです。\n"
+        f"『{title}』\n"
+        f"これをもとに、営業職向けのX（旧Twitter）投稿を140文字以内で作成してください。\n"
+        f"カジュアルで親しみやすく、記事URL（{url}）も最後に含めてください。"
+    )
+    response = model.generate_content(prompt)
+    return response.text.strip()
