@@ -1,5 +1,5 @@
 from utils.fetch_news import get_latest_articles
-from utils.generate_post import summarize_article
+from utils.generate_summary import summarize_article
 from utils.post_to_slack import post_to_slack
 
 print("スクリプトが起動しました！")
