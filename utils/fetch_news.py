@@ -14,11 +14,12 @@ def get_latest_articles(limit=3):
         title_tag = item.find("title")
         link_tag = item.find("link")
     
-        if title_tag and link_tag:
-            articles.append({
-                "title": title_tag.text,
-                "link": link_tag.text
-            })
+    if title_tag and link_tag and link_tag.text.strip():
+        articles.append({
+            "title": title_tag.text.strip(),
+            "link": link_tag.text.strip()
+        })
+
 
 
     return articles
