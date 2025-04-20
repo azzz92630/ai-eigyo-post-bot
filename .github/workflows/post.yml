@@ -2,9 +2,8 @@ name: Post AI News to Slack
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # 5分ごとに実行（UTC）
+    - cron: '*/5 * * * *'  # 毎5分（UTC）
   workflow_dispatch:
-
 
 jobs:
   post-to-slack:
