@@ -6,8 +6,15 @@ from utils.post_to_slack import post_to_slack
 
 print("🛎️ スクリプトが起動いたしました！")
 
+articles = [
+    {
+        "title": "生成AIで業務効率化！今話題の活用法とは？",
+        "link": "https://example.com/sample-news"
+    }
+]
+
 # 最新記事を取得
-articles = get_latest_articles()
+# articles = get_latest_articles()
 
 if not articles:
     print("⚠️ 記事が見つかりませんでした。")
