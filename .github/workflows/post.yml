@@ -2,9 +2,9 @@ name: Post AI News to Slack
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # JST 8:00（= UTC 23:00）
-    - cron: '0 9 * * *'   # JST 18:00（= UTC 9:00）
+    - cron: '*/5 * * * *'  # 5分ごとに実行（UTC）
   workflow_dispatch:
+
 
 jobs:
   post-to-slack:
