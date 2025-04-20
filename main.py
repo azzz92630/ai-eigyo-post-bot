@@ -1,5 +1,5 @@
 from utils.fetch_news import get_latest_articles
-from utils.generate_post import generate_post
+from utils.generate_post import summarize_article
 from utils.post_to_twitter import post_to_twitter
 
 print("スクリプトが起動しました！")
