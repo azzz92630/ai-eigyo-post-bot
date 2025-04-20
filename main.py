@@ -1,6 +1,10 @@
 from utils.fetch_news import get_latest_articles
 from utils.generate_post import summarize_article
 from utils.post_to_twitter import post_tweet
+from post_to_slack import post_to_slack
+
+message = "こんにちは、お嬢様。\n本日はSlackへの自動投稿テストを実施いたします。"
+post_to_slack(message)
 
 print("スクリプトが起動しました！")
 
