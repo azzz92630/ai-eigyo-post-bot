@@ -16,7 +16,7 @@ for article in articles:
     link = article["link"]
 
     # Gemini等で生成した投稿文（今はタイトルを使う形）
-    post_text = generate_post(title, link)
+    post_text = summarize_article(title, link)
 
     # ハッシュタグ付きで整形
     full_text = f"{post_text}\n\n{hashtags}"
