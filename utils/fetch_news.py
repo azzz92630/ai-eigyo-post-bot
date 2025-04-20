@@ -11,9 +11,14 @@ def get_latest_articles(limit=3):
     articles = []
 
     for item in items:
-        articles.append({
-            "title": item.title.text,
-            "link": item.link.text
-        })
+        title_tag = item.find("title")
+        link_tag = item.find("link")
+    
+        if title_tag and link_tag:
+            articles.append({
+                "title": title_tag.text,
+                "link": link_tag.text
+            })
+
 
     return articles
