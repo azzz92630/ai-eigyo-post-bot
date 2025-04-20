@@ -22,4 +22,4 @@ for article in articles:
     full_text = f"{post_text}\n\n{hashtags}"
 
     # 投稿
-    post_tweet(text)
+    post_tweet(full_text)
