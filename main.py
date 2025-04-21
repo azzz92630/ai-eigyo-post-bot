@@ -2,10 +2,15 @@
 from utils.fetch_news import get_translated_articles
 from utils.generate_summary import summarize_article
 from utils.post_to_slack import post_to_slack
+from utils.posted_log import load_posted_links, save_posted_link
+
 
 print("🔧 スクリプトが起動いたしました！")
 
 articles = get_translated_articles()
+posted_links = load_posted_links()
+articles = [a for a in articles if a["link"] not in posted_links]
+
 
 if not articles:
     print("⚠️ 記事が見つかりませんでした。")
@@ -28,3 +33,5 @@ else:
     print("📤 Slack投稿処理に入ります")
     post_to_slack(text)
     print("✅ Slack投稿成功！")
+    save_posted_link(first_article["link"])
+
