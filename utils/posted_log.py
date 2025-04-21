@@ -8,7 +8,10 @@ def load_posted_links():
     if not os.path.exists(POSTED_LOG_PATH):
         return set()
     with open(POSTED_LOG_PATH, "r") as f:
-        return set(json.load(f))
+        try:
+            return set(json.load(f))
+        except json.JSONDecodeError:
+            return set()
 
 def save_posted_link(link):
     posted = load_posted_links()
